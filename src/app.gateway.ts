@@ -26,14 +26,12 @@ constructor(private roomService:RoomService){}
 
 @SubscribeMessage('ppl-join')
 async handlePeopleJoinRoom(client: any, payload: any):Promise<void>{
-  console.log(payload)
   this.server.to(payload.roomId).emit('ppl-join',{...payload,status:'joined'})
   await this.roomService.saveRoomJoiners(payload.roomId,payload)
 }
 
 @SubscribeMessage('ppl-leave')
 async handlePeopleLeaveRoom(client: any, payload: any):Promise<void>{
-  console.log(payload)
   this.server.to(payload.roomId).emit('ppl-join',{...payload,status:'left'})
   await this.roomService.peopleLeaveRoom(payload.roomId,payload)
 }
