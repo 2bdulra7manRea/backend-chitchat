@@ -37,6 +37,14 @@ async handlePeopleLeaveRoom(client: any, payload: any):Promise<void>{
 }
 
 
+// ** for test
+
+@SubscribeMessage('peer-stream')
+async handlePeerStreaming(client: any, payload: any):Promise<void>{
+  this.server.to(payload.roomId).emit('peer-stream',payload)
+}
+
+
 
 @SubscribeMessage('join-room')
 handleJoinRoom(client: any, payload: any): string {
